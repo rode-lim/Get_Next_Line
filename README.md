@@ -2,6 +2,7 @@
 This project is about programming a function that returns a line read from a file descriptor.
 
 ![Get_Next_Line](Get_next_line.png)
+
 ==Requirements==
 - Vim, Vscode, (your pick)...
 

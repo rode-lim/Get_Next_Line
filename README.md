@@ -50,7 +50,7 @@ Header file, this file is used to get all the libraries, buffersize, etc...
 
 As the coding takes longer I will go throught the 3 files as checkpoints, so first...
 
-#### Checkpoint 1/3 get_next_line.h
+#### 🐲Checkpoint 1/3: get_next_line.h
 The first thing I did as a 42 student is ":Stdheader" running this command on Vim will add the 42 header to my project.
 
 After that the first part to do is start the header file so as any other project:
@@ -85,3 +85,5 @@ Now proceed to finish get_next_line.h by ending the def.
 ```
 #endif
 ```
+#### 🐲Checkpoint 2/3: get_next_line.c
+

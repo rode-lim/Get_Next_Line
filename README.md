@@ -17,8 +17,8 @@ This project is made for 42 School.
 Goals->
 According to the Subject this project is going to teach us about static variables in C.
 
-# GET NEXT LINE GUIDE:
-## 1st step: Understanding
+# 🐉GET NEXT LINE GUIDE🐉
+## 1st step: Understanding🐉
 
 Project name: get_next_line
 Prototype: char *get_next_line(int fd);
@@ -32,3 +32,18 @@ PROHIBITED:
 
 BONUS:
 EMPTY and I don't inteed to do it.
+
+## 2nd step: Files🐲
+
+The first thing I did in my projects was make 3 files:
+
+#### get_next_line.c
+Main function where get next line is going to be.
+
+#### get_next_line_utils.c
+Secondary funtions needed to run the main function.
+
+#### get_next_line.h
+Header file, this file is used to get all the libraries, buffersize, etc...
+
+## 3rd step: Coding...🐲

@@ -87,3 +87,54 @@ Now proceed to finish get_next_line.h by ending the def.
 ```
 #### 🐲Checkpoint 2/3: get_next_line.c
 
+(Disclaimer: I'd like to note that we must understand this project is done through my view and I hope you understand in this tutorial its gonna be displayed with my POV, if you need any help just ask me.
+so lets get started?)
+
+So whats the first step?
+Let's make the main function.
+
+(For 42 students: Don't forget to add the header to your file)
+We must start by adding the header we just created so...
+
+```
+#include "get_next_line.h"
+```
+Now we add the function declaration to start our work:
+
+```
+char    *get_next_line(int fd)
+{
+    
+}
+```
+Now let's start by defining our variables.
+```
+char            *get_line;
+static char     *hold;
+char            *buffer;
+```
+What do they do?
+
+
+get_line:
+This will be used to store the line read from the file.
+
+
+hold:
+The use of static means that the variable retains its value between function calls, acting as a kind of "memory" for the function.
+
+
+buffer:
+This pointer will be used to allocate a temporary buffer for reading data from the file.
+
+
+Now we move on...
+we are going to create the first if in our function.
+This if is going to see if the fd(file descriptor) or the buffer is lower or the same(<=) as 0.
+```
+if (fd < 0 || BUFFER_SIZE <= 0)
+      return (0);
+```
+If this turns out to be true it's going to return 0.
+
+

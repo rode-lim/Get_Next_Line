@@ -130,6 +130,7 @@ This pointer will be used to allocate a temporary buffer for reading data from t
 
 Now we move on...
 we are going to create the first if in our function.
+
 This if is going to see if the fd(file descriptor) or the buffer is lower or the same(<=) as 0.
 ```
 if (fd < 0 || BUFFER_SIZE <= 0)
@@ -138,3 +139,13 @@ if (fd < 0 || BUFFER_SIZE <= 0)
 If this turns out to be true it's going to return 0.
 
 
+Now we are going to allocate memory for the 'buffer' using the 'malloc' function. we will need it to allocate 'buffer size + 1' to store the read data, plus a null terminator.
+The result will be cast to a 'char *' and assigned to 'buffer'.
+```
+buffer = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
+```
+We mus now add the second "*if*" of this function. This if is goig to check if the allocation of memory for 'buffer' was successful. If it wasnt and 'buffer' is '\0' (NULL) it's going to return 0.
+```
+if (buffer == '\0')
+    return (0);
+```

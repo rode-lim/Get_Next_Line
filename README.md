@@ -144,7 +144,7 @@ if (buffer == '\0')
 ```
 Now we give 'get_line' a new value.
 The value we are going to give is the results of a function that we have yet to create.
-That function is going to read lines, therefore it's name "read_line".
+That function is going to read lines, therefore it's name `read_line`.
 We must give the function, the `fd`, the `buffer` and `hold`.
 ```
 get_line = read_line(fd, buffer, hold);
@@ -183,3 +183,81 @@ And we finalize by returning 'get_line':
 }
 ```
 This completes the explanation of the main function.
+
+
+NOW WE MOVE TO THE FIRST CREATED FUNCTION `read_line`!
+
+First we define the function:
+```
+char    *read_line(int fd, char *buffer, char *hold)
+```
+Obviously the () have the contents we sent before on the previous function.
+
+Now we declere two local variables and assign the value to one of them:
+```
+{
+    int    readline;
+    char    *temp;
+
+    readline = 1;
+```
+We start our loop that will continue as long as readline is not '\0'.
+```
+    while (readline != '\0')
+    {
+```
+Now we use read function to read data from the file descriptor and store it in the buffer.
+The number of characters read is stored in `readline` and will read a maximum of `BUFFER_SIZE` bytes.
+```
+        readline = read(fd, buffer, BUFFER_SIZE);
+```
+Using an `if` statement we are going to check if `readline` is equal to -1, which would indicate if an error occurred, if that's the case the function returns 0.
+```
+        if (readline == -1)
+            return (0);
+```
+Now the loop checks if `readline` is equal to 0, in which case means that we reached the end of the file, so we must break the `while` loop using `break`.
+```
+        else if (readline == 0)
+            break ;
+```
+The next line sets the character at the position `readline` in the `buffer` array to the character '\0', to therefore terminate the string.
+```
+        buffer[readline] = '\0';
+```
+To proceed make a `if` statement that checks if the `hold` pointer is null. If it is, it will allocate memory for a new string and initalizes it to an empty string using `ft_strdup`.
+```
+        if (hold == NULL)
+            hold = ft_strdup("");
+```
+Assign `temp` the value of `hold` to allow us to keep track of the original `hold` string.
+```
+        temp = hold;
+```
+Concatenate the `temp` and `buffer` strings and assign the result to the `hold` pointer using `ft_strjoin`.
+This will effectively append the newly read data to the existing `hold` string.
+```
+        hold = ft_strjoin(temp, buffer);
+```
+Free `temp` to prevent memory leaks and set it to `NULL` to ensure it doesnt point to any memory location after it has been freed.
+```
+        free(temp);
+        temp = NULL;
+```
+Make an `if` statemente to check if theres  newline character ('\n') in the `buffer`. If there is one it breaks out of the while loop assuming that the line of imput has been read.
+```
+        if (ft_strchr(buffer, '\n'))
+            break ;
+        }
+```
+Finally return `hold` and it should contain the concatenated lines read from the file.
+```
+    return (hold);
+}
+```
+
+Wow...We actually finished another function.
+Good job. One more to go!
+
+
+Now we learn to do `protects`:

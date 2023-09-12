@@ -168,7 +168,7 @@ if (get_line == NULL)
     return (NULL);
 }
 ```
-WWe use 'free' and '= NULL' for the same reasons as before.
+We use 'free' and '= NULL' for the same reasons as before.
 
 However, we use 'return' to indicate that there are no lines available or an error occurred.
 

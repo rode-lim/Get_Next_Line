@@ -193,7 +193,26 @@ char    *read_line(int fd, char *buffer, char *hold)
 ```
 Obviously the () have the contents we sent before on the previous function.
 
-Now we declere two local variables and assign the value to one of them:
+Now we declere two local variables and assign the value to one of them:char    *protects(char *get_line)
+{
+        size_t  i;
+        char    *hold;
+
+        i = 0;
+        while (get_line[i] != '\0' && get_line[i] != '\n')
+                i++;
+        if (get_line[i] == '\0')
+                return (NULL);
+        hold = ft_substr(get_line, i + 1, ft_strlen(get_line) - i);
+        if (*hold == '\0')
+        {
+                free(hold);
+                hold = NULL;
+        }
+        get_line[i + 1] = '\0';
+        return (hold);
+}
+
 ```
 {
     int    readline;
@@ -261,3 +280,175 @@ Good job. One more to go!
 
 
 Now we learn to do `protects`:
+
+First we obviously make the function defenition:
+```
+char    *protects(char *get_line)
+{
+```
+we are going to add 2 variables a `size_t` and a `char *`
+Hold is going to have the result and i is going to serve as a counter.
+```
+    size_t    i;
+    char    *hold;
+
+    i = 0;
+```
+(We place i = to 0 as its going to inicialize the value on the position 0.)
+
+we are now going to make a while that's going to increment `i` until it reaches a null character or a new line:
+```
+    while (get_line[i] != '\0' && get_line[i] != '\n')
+        i++;
+```
+now we check if the loop ended because we reached the end of the string by doing a `if`:
+```
+    if (get_line[i] == '\0')
+        return (NULL);
+```
+The next line calls a function named `ft_substr` to extract a substring from the `get_line` string. It starts at the character following the newline character (or the end of the string if no newline was found) and goes up to the end of the string. The result is assigned to the `hold` variable.
+```
+    hold = ft_substr(get_line, i + 1, ft_strlen(get_line) - i);
+```
+(in case you dont know `strlen` is a function that see's the length of a string.)
+
+Now we check if the first character of `hold` is a null terminator and if it is we know the extracted substr is empty. In this case we free the memory occupied by `hold` using `free` and set `hold` to `NULL` to acoid potential memory leaks.
+```
+    if (*hold == '\0')
+    {
+        free(hold);
+        hold = NULL;
+    }
+```
+Now we truncate the original string removing everything after the newline chracter (or at the end of the string):
+```
+    get_line[i + 1] = '\0';
+```
+Finally. the function returns the `hold` pointer as said in the beggining. This will either point to a non empty substrin, the original `get_line` string OR `NULL` if the original string was empty or had no newline characters.
+
+The purpose of this function is to protect the first part of the input string up the the first newline chracter and return the remaining part of the string.
+
+#### 🐲 Checkpoint 3/3: get_next_utils.c
+
+Wow you made it. Since utils are basic functions that only 42 requires I will leave here the final code instead of making a whole tutorial:
+
+```
+#include "get_next_line.h"
+```
+Include your header file.
+
+```
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (str == NULL)
+	{
+		return (NULL);
+	}
+	while (s1[i] != '\0')
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		str[i] = s2[j];
+		i++;
+		j++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+```
+This function joins 2 strings together.
+```
+char	*ft_strdup(const char *s)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	while (s[j] != '\0')
+	{
+		j++;
+	}
+	str = (char *)malloc(sizeof(*str) * (j + 1));
+	if (str == NULL)
+		return (NULL);
+	while (i < j)
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+```
+This function dupes a string.
+```
+char	*ft_strchr(const char *s, int i)
+{
+	while (*s != '\0' && (unsigned char)i != *s)
+		s++;
+	if ((unsigned char)i == *s)
+		return ((char *)s);
+	return (0);
+}
+```
+this code is a function that searches for a specific character in a null-terminated string and returns a pointer to the first occurrence of that character in the string if found. If the character is not found, it returns `0`.
+```
+size_t	ft_strlen(char const *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		i++;
+	}
+	return (i);
+}
+```
+This checks for the lenght of a null terminated string.
+```
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	size_t	j;
+	char	*str;
+
+	if (start >= ft_strlen(s))
+	{
+		str = (char *)malloc(sizeof(char));
+		*str = 0;
+		return (str);
+	}
+	if (len >= ft_strlen(s))
+		len = ft_strlen(s) - start;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == NULL)
+		return (NULL);
+	j = 0;
+	while (start < ft_strlen(s) && j < len)
+	{
+		str[j++] = s[start++];
+	}
+	str[j] = '\0';
+	return (str);
+}
+```
+this checks for a substring inside a string.
+
+## End...
+
+Congrats you have finished `get_next_line`, double check the file names and you should be ready to deliver.
+
+Don't forget headers!
+Check the files above for the order of functions and a complete vew of the code:

@@ -193,26 +193,7 @@ char    *read_line(int fd, char *buffer, char *hold)
 ```
 Obviously the () have the contents we sent before on the previous function.
 
-Now we declere two local variables and assign the value to one of them:char    *protects(char *get_line)
-{
-        size_t  i;
-        char    *hold;
-
-        i = 0;
-        while (get_line[i] != '\0' && get_line[i] != '\n')
-                i++;
-        if (get_line[i] == '\0')
-                return (NULL);
-        hold = ft_substr(get_line, i + 1, ft_strlen(get_line) - i);
-        if (*hold == '\0')
-        {
-                free(hold);
-                hold = NULL;
-        }
-        get_line[i + 1] = '\0';
-        return (hold);
-}
-
+Now we declere two local variables and assign the value to one of them:
 ```
 {
     int    readline;
